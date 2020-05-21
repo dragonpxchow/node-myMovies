@@ -7,7 +7,7 @@ const app = express();
 app.use(function (req, res, next) {
   res.header(
     "Access-Control-Allow-Origin",
-    "https://intense-lowlands-44905.herokuapp.com/api/Genres"
+    "https://intense-lowlands-44905.herokuapp.com"
   );
   res.header(
     "Access-Control-Allow-Methods",
