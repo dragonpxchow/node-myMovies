@@ -2,13 +2,11 @@ const winston = require("winston");
 const express = require("express");
 const config = require("config");
 const app = express();
+/*
 //  added by Pei app.use
 // Enable CORS
 app.use(function (req, res, next) {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://gentle-beach-57815.herokuapp.com"
-  );
+  res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Methods",
     "GET,HEAD,OPTIONS,POST,PUT,DELETE"
@@ -19,6 +17,7 @@ app.use(function (req, res, next) {
   );
   next();
 });
+*/
 
 require("./startup/logging")();
 require("./startup/cors")(app);
