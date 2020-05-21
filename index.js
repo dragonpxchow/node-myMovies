@@ -7,7 +7,7 @@ const app = express();
 app.use(function (req, res, next) {
   res.header(
     "Access-Control-Allow-Origin",
-    "https://intense-lowlands-44905.herokuapp.com"
+    "https://gentle-beach-57815.herokuapp.com"
   );
   res.header(
     "Access-Control-Allow-Methods",
