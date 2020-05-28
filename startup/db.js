@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const config = require("config");
 
 module.exports = function () {
-  //const db = config.get("db");
+  const db = config.get("db");
   // mongoose.connect(db).then(() => winston.info(`Connected to ${db}...`));
 
   const MongoClient = require("mongodb").MongoClient;
-  const uri = config.get("db");
+  const uri = db;
 
   const client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((err) => {
