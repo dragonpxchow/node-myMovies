@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
+// get all movies
 router.get("/", async (req, res) => {
   const movies = await Movie.find()
     .select("-__v")
@@ -15,6 +16,7 @@ router.get("/", async (req, res) => {
   res.send(movies);
 });
 
+// create new movie
 router.post("/", [auth], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -30,6 +32,8 @@ router.post("/", [auth], async (req, res) => {
     },
     numberInStock: req.body.numberInStock,
     dailyRentalRate: req.body.dailyRentalRate,
+    stockedOn:req.body.stockedOn,
+    releasedOn:req.body.releasedOn,
     publishDate: moment().toJSON()
   });
   await movie.save();
@@ -37,6 +41,7 @@ router.post("/", [auth], async (req, res) => {
   res.send(movie);
 });
 
+// update movie
 router.put("/:id", [auth], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -53,7 +58,9 @@ router.put("/:id", [auth], async (req, res) => {
         name: genre.name
       },
       numberInStock: req.body.numberInStock,
-      dailyRentalRate: req.body.dailyRentalRate
+      dailyRentalRate: req.body.dailyRentalRate,
+      stockedOn:req.body.stockedOn,
+      releasedOn:req.body.releasedOn
     },
     { new: true }
   );
@@ -64,6 +71,7 @@ router.put("/:id", [auth], async (req, res) => {
   res.send(movie);
 });
 
+// delete movie
 router.delete("/:id", [auth, admin], async (req, res) => {
   const movie = await Movie.findByIdAndRemove(req.params.id);
 
@@ -73,6 +81,7 @@ router.delete("/:id", [auth, admin], async (req, res) => {
   res.send(movie);
 });
 
+// get a movie with id
 router.get("/:id", validateObjectId, async (req, res) => {
   const movie = await Movie.findById(req.params.id).select("-__v");
 
